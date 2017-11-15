@@ -16,10 +16,10 @@ namespace Journals.ManualTesting
         {
 
 
-            var wp = new WpClient("eastwing", "Timka511");
+            var wp = new WpClient("eastwing", "Timka511", "https://journals.ru/xmlrpc.php");
 
             var blogs = wp.GetBlogs().Result;
-
+            var posts = wp.GetPosts(blogs[0].Id, 20, 0).Result;
 
             Console.ReadKey();
         }

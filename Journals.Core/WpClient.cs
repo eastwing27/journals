@@ -1,45 +1,69 @@
-﻿using Nwc.XmlRpc;
-using System;
+﻿using Journals.Core.DataObjects;
+using Nwc.XmlRpc;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Journals.Core
 {
     public class WpClient
     {
-        private string uri => "https://journals.ru/xmlrpc.php";
+        private string uri { get; set; }
         private string login { get; set; } = "";
         private string password { get; set; } = "";
         private int userId { get; set; } = 0;
         private int blogId { get; set; } = 0;
 
-        public WpClient(string Login, string Password)
+        public WpClient(string Login, string Password, string Uri)
         {
             login = Login;
             password = Password;
-
-            var blogs = GetBlogs().Result;
-            blogId = Convert.ToInt32(blogs["blogid"]);
+            uri = Uri;
         }
 
-        private async Task<IList> SendRequest(string Method, IEnumerable<string> Parameters)
+        private async Task<IEnumerable<T>> SendRequest<T>
+            (string Method, IEnumerable<object> Parameters) 
+            where T : DataObject, new()
         {
             var client = new XmlRpcRequest();
             client.MethodName = Method;
             foreach (var param in Parameters)
                 client.Params.Add(param);
 
-            var resTask = Task.Run(() => client.Send(uri));
-            var response = await resTask;
+            var response = await Task.Run(() => client.Send(uri));
 
-            return response.Value as IList;
+            var value = (response.Value as IList).Cast<Hashtable>();
+            return value.Select(item => item.ToDataObject<T>());
         }
 
-        public async Task<Hashtable> GetBlogs()
+        public async Task<UserBlogObject[]> GetBlogs()
         {
-            var result = await SendRequest("wp.getUsersBlogs", new[] { login, password });
-            return result[0] as Hashtable;    
+            var result = await SendRequest<UserBlogObject>("wp.getUsersBlogs", 
+                new[] 
+                {
+                    login,
+                    password
+                });
+            return result.ToArray();   
+        }
+
+        public async Task<PostObject[]> GetPosts(string BlogId, int Number, int Offset)
+        {
+            var result = await SendRequest<PostObject>("wp.getPosts",
+                new object[]
+                {
+                    BlogId,
+                    login,
+                    password,
+                    new
+                    {
+                        number = Number,
+                        offset = Offset
+                    }
+                });
+
+            return result.ToArray();
         }
     }
 }
