@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="XmlRpcCs" Version="2.1.1.2" />
+    <Reference Include="XmlRpcCs">
+      <HintPath>XmlRpcCs.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

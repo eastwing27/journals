@@ -1,4 +1,5 @@
 ﻿using Journals.Core.DataObjects;
+using Journals.Core.Exceptions;
 using Nwc.XmlRpc;
 using System;
 using System.Collections;
@@ -31,7 +32,12 @@ namespace Journals.Core
             foreach (var param in Parameters)
                 request.Params.Add(param);
 
-             return await Task.Run(() => request.Send(uri));
+            var result = await Task.Run(() => request.Send(uri));
+
+            if (result.IsFault)
+                throw new JClientException(result.FaultCode, result.FaultString);
+
+            return result;
         }
 
         private async Task<T> Retrieve<T>(string Method, object[] Parameters)
@@ -86,38 +92,38 @@ namespace Journals.Core
                     BlogId,
                     login,
                     password,
-                    new
+                    new Hashtable
                     {
-                        number = Number,
-                        offset = Offset
+                        { "number", Number },
+                        { "offset", Offset }
                     }
                 });
         }
 
         public async Task<string> CreatePost(int BlogId, int AuthorId, string Title, string Body)
         {
-            var dto = new
+            var dto = new Hashtable
             {
-                post_type = "post",
-                post_status = "publish",
-                post_title = Title,
-                post_author = AuthorId,
-                post_excerpt = "",
-                post_content = Body,
-                post_date_gmt = DateTime.UtcNow,
-                post_date = DateTime.Now,
-                post_format = "standard",
-                post_name = "",
-                post_password = "",
-                comment_status = "open",
-                ping_status = "open",
-                sticky = 1,
-                post_thumbnail = new object[0],
-                post_parent = 0,
-                custom_fields = new object[0],
-                terms = new object[0],
-                terms_names = new object[0],
-                enclosure = new { url = "", length = 0, type = "" }
+                {"post_type", "post"},
+                {"post_status", "private"},
+                {"post_title", Title},
+                {"post_author", AuthorId},
+                {"post_excerpt", ""},
+                {"post_content", Body},
+                {"post_date_gmt", DateTime.UtcNow},
+                {"post_date", DateTime.Now },
+                {"post_format", "standard"},
+                {"post_name", ""},
+                {"post_password", ""},
+                {"comment_status", "open"},
+                {"ping_status", "open"},
+                {"sticky", 1},
+                {"post_thumbnail", new ArrayList()},
+                {"post_parent", 0},
+                {"custom_fields", new ArrayList()},
+                {"terms", new ArrayList()},
+                {"terms_names", new ArrayList()},
+                {"enclosure", new object()}
             };
 
             var result = await Send(NEW_POST,

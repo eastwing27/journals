@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Journals.App"
+             x:Class="Journals.App.MainPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Welcome to Journals!"
+                VerticalOptions="Start" 
+                HorizontalOptions="CenterAndExpand" >
+                <Label.Style>
+                    <Style TargetType="Label">
+                        <Setter Property="TextColor" Value="DarkBlue" />
+                        <Setter Property="BackgroundColor" Value="Silver" />
+                    </Style>
+                </Label.Style>
+            </Label>
+            <Entry x:Name="entLogin" Placeholder="Введите логин">
+            </Entry>
+            <Entry x:Name =" entPassword" Placeholder="Введите пароль" IsPassword="True">
+            </Entry>
+            <Button x:Name="btnLogin" Text="Вход" Clicked="OnLogin" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
