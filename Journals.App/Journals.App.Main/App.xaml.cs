@@ -7,17 +7,19 @@ using System.Text;
 using Xamarin.Forms;
 
 namespace Journals.App
-{ 
+{
     public partial class App : Application
     {
         public static JournalsService Journals { get; internal set; }
 
-        public delegate void NotificationMethod(string Message);
-        public static NotificationMethod Notify;
+        //Platform-specific methods and attributes.
+        public static Action<string> Notify;
 
-        public App()
+        public App(Natives Natives)
         {
             InitializeComponent();
+
+            Notify = Natives.Notify;
 
             MainPage = new Journals.App.MainPage();
         }

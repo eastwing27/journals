@@ -1,4 +1,5 @@
 ﻿using Journals.Core;
+using Journals.Core.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,12 +13,19 @@ namespace Journals.App.Services
 
         public async void Init (string Login, string Password, string ApiEndpoint)
         {
-            var tmpClient = new JournalsClient(Login, Password, ApiEndpoint);
-            var blog = (await tmpClient.GetBlogs())[0];
-            if (blog != null)
+            try
             {
-                client = tmpClient;
-                blogId = blog.Id;
+                var tmpClient = new JournalsClient(Login, Password, ApiEndpoint);
+                var blog = (await tmpClient.GetBlogs())[0];
+                if (blog != null)
+                {
+                    client = tmpClient;
+                    blogId = blog.Id;
+                }
+            }
+            catch(JClientException e)
+            {
+                App.Notify(e.FaultString);
             }
         }
     }
