@@ -14,9 +14,16 @@ namespace Journals.App
             InitializeComponent();
         }
 
-        public void OnLogin(object sender, EventArgs e)
+        public async void OnLoginClick(object sender, EventArgs e)
         {
-            
+            var result = await App.Journals.TryInitAsync(entLogin.Text, entPassword.Text);
+
+            if (!result.Success)
+            {
+                App.Notify(result.ErrorMessage);
+                return;
+            }
+            //TODO: enter to work mode
         }
     }
 }

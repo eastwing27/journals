@@ -13,11 +13,13 @@ namespace Journals.App
         public static JournalsService Journals { get; internal set; }
 
         //Platform-specific methods and attributes.
-        public static Action<string> Notify;
+        public static Action<string> Notify { get; private set; }
 
         public App(Natives Natives)
         {
             InitializeComponent();
+
+            Journals = new JournalsService();
 
             Notify = Natives.Notify;
 
