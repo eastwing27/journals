@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Journals.App.UWP", "Journal
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Journals.App.iOS", "Journals.App\Journals.App.iOS\Journals.App.iOS.csproj", "{1E152740-8CA4-450A-BEDC-28619C160C93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Journals.App", "Journals.App\Journals.App.Main\Journals.App.csproj", "{6A9FE847-443E-44B8-A2AA-73A4A53828AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Journals.App", "Journals.App\Journals.App.Main\Journals.App.csproj", "{6A9FE847-443E-44B8-A2AA-73A4A53828AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

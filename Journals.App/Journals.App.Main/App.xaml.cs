@@ -1,4 +1,5 @@
-﻿using Journals.App.Services;
+﻿using Journals.App.Pages;
+using Journals.App.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,20 +11,17 @@ namespace Journals.App
 {
     public partial class App : Application
     {
-        public static JournalsService Journals { get; internal set; }
+        internal static INative Native { get; private set; }
+        internal static JournalsService Journals { get; private set; }
 
-        //Platform-specific methods and attributes.
-        public static Action<string> Notify { get; private set; }
-
-        public App(Natives Natives)
+        public App()
         {
             InitializeComponent();
 
+            Native = DependencyService.Get<INative>();
             Journals = new JournalsService();
 
-            Notify = Natives.Notify;
-
-            MainPage = new Journals.App.MainPage();
+            MainPage = new MainPage(new LoginPage());
         }
 
         protected override void OnStart()

@@ -19,7 +19,8 @@ namespace Journals.ManualTesting
 
             try
             {
-                var blogs = client.GetBlogs().Result;
+                var blogs = client.GetBookmarkPosts().Result;
+                Console.Write(blogs.Length);
             }
             catch(AggregateException e)
             {

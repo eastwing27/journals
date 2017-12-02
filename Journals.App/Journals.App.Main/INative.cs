@@ -4,8 +4,9 @@ using System.Text;
 
 namespace Journals.App
 {
-    public class Natives
+    public interface INative
     {
-        public Action<string> Notify { get; set; }
+        string BaseUrl { get; }
+        Action<string> Notify { get; }
     }
 }

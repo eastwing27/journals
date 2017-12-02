@@ -100,6 +100,17 @@ namespace Journals.Core
                 });
         }
 
+        public async Task <BookmarkPostObject[]> GetBookmarkPosts()
+        {
+            var result = await RetrieveArray<BookmarkPostObject>(GET_BOOKMARK_POSTS,
+                new[]
+                {
+                    login,
+                    password
+                });
+            return result;
+        }
+
         public async Task<string> CreatePost(int BlogId, int AuthorId, string Title, string Body)
         {
             var dto = new Hashtable

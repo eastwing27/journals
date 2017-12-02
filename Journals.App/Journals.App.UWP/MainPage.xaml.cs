@@ -18,20 +18,11 @@ namespace Journals.App.UWP
 {
     public sealed partial class MainPage
     {
-        Natives natives => new Natives()
-        {
-            Notify = async message =>
-            {
-                var popup = new MessageDialog(message, Constants.TITLE);
-                await popup.ShowAsync();
-            }
-        };
-
         public MainPage()
         {
             this.InitializeComponent();
 
-            LoadApplication(new Journals.App.App(natives));
+            LoadApplication(new Journals.App.App());
         }
     }
 }

@@ -27,5 +27,9 @@ namespace Journals.Core
         const string GET_CATEGORIES = "wp.getCategories";
         const string NEW_CATEGORY = "wp.newCategory";
         const string GET_PROFILE = "wp.getProfile";
+
+        const string GET_BOOKMARK_GROUPS = "jr.getBookmarkGroups";
+        const string GET_BOOKMARKS = "jr.getBookmarks";
+        const string GET_BOOKMARK_POSTS = "jr.getBookmarkPosts";
     }
 }
