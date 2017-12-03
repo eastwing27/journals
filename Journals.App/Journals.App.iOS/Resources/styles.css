@@ -1,0 +1,11 @@
+﻿.journalsPost img {
+    max-width: 100% !important;
+}
+
+.journalsPost .even {
+    background-color: #cecece;
+}
+
+.journalsPost .odd {
+    background-color: #b9b9b9;
+}

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Journals.App.Pages.BookmarksPage">
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS, Android" Value="0,40,0,0" />
+        </OnPlatform>
+    </ContentPage.Padding>
+    <ContentPage.Content>
+        <StackLayout>
+            <!--<Label Text="Закладки" FontSize="Medium" HorizontalOptions="Center" />-->
+            <WebView x:Name="BookmarksWebView" VerticalOptions="FillAndExpand" Source="bmSource"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

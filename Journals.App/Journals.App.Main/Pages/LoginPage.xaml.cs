@@ -19,9 +19,12 @@ namespace Journals.App.Pages
 
         async void OnClick(object sender, EventArgs e)
         {
+            await Navigation.PushModalAsync(App.WaitPage);
+
             var result = await App.Journals.TryInitAsync(LoginEntry.Text, PasswordEntry.Text);
             if (!result.Success)
             {
+                await Navigation.PopModalAsync();
                 App.Native.Notify(result.ErrorMessage);
                 return;
             }

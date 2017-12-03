@@ -61,16 +61,14 @@ namespace Journals.App.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на &lt;h2&gt;{0}&lt;/h2&gt;
-        ///&lt;div class=&quot;row&quot;&gt;
-        ///    &lt;div class=&quot;col-md-7&quot;&gt;
-        ///        &lt;strong&gt;Журнал: &lt;/strong&gt;{1}
+        ///   Ищет локализованную строку, похожую на &lt;div class=&quot;journalsPost&quot; id=&quot;{4}&quot;&gt;
+        ///    &lt;div class=&quot;row&quot;&gt;
+        ///        &lt;span class=&quot;label label-primary&quot;&gt;&lt;strong&gt;Журнал: &lt;/strong&gt;{1}&lt;/span&gt;
+        ///        &lt;span class=&quot;label label-success&quot;&gt;&lt;strong&gt;Автор: &lt;/strong&gt;{2}&lt;/span&gt;
         ///    &lt;/div&gt;
-        ///    &lt;div class=&quot;col-md-5&quot;&gt;
-        ///        &lt;strong&gt;Автор: &lt;/strong&gt;{2}
-        ///    &lt;/div&gt;
-        ///&lt;/div&gt;
-        ///&lt;p&gt;{3}&lt;/p&gt;.
+        ///    &lt;h2&gt;{0}&lt;/h2&gt;
+        ///    &lt;p&gt;{3}&lt;/p&gt;
+        ///&lt;/div&gt;.
         /// </summary>
         internal static string bookmarkPost {
             get {
@@ -81,16 +79,38 @@ namespace Journals.App.Resources {
         /// <summary>
         ///   Ищет локализованную строку, похожую на &lt;html&gt;
         ///&lt;head&gt;
-        ///    &lt;script src=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;
+        ///    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css&quot; /&gt;
+        ///    &lt;link rel=&quot;stylesheet&quot; href=&quot;styles.css&quot;&gt;
         ///&lt;/head&gt;
         ///&lt;body&gt;
-        ///    {0}
+        ///    &lt;div class=&quot;container&quot;&gt;
+        ///        {0}
+        ///    &lt;/div&gt;
         ///&lt;/body&gt;
         ///&lt;/html&gt;.
         /// </summary>
         internal static string master {
             get {
                 return ResourceManager.GetString("master", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на &lt;!DOCTYPE html&gt;
+        ///
+        ///&lt;html lang=&quot;en&quot; xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+        ///&lt;head&gt;
+        ///    &lt;meta charset=&quot;utf-8&quot; /&gt;
+        ///    &lt;title&gt;&lt;/title&gt;
+        ///&lt;/head&gt;
+        ///&lt;body&gt;
+        ///
+        ///&lt;/body&gt;
+        ///&lt;/html&gt;.
+        /// </summary>
+        internal static string post {
+            get {
+                return ResourceManager.GetString("post", resourceCulture);
             }
         }
     }

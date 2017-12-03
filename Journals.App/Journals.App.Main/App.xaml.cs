@@ -1,4 +1,5 @@
 ﻿using Journals.App.Pages;
+using Journals.App.Pages.Modal;
 using Journals.App.Services;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace Journals.App
         internal static INative Native { get; private set; }
         internal static JournalsService Journals { get; private set; }
 
+        internal static WaitPage WaitPage { get; private set; }
+
         public App()
         {
             InitializeComponent();
@@ -22,6 +25,7 @@ namespace Journals.App
             Journals = new JournalsService();
 
             MainPage = new MainPage(new LoginPage());
+            WaitPage = new WaitPage();
         }
 
         protected override void OnStart()

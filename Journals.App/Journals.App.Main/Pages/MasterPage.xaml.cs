@@ -14,13 +14,10 @@ namespace Journals.App.Pages
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MasterPage : CarouselPage
 	{
-        HtmlWebViewSource bmSource;
         
         public MasterPage ()
 		{
 			InitializeComponent ();
-
-            bmSource = new HtmlWebViewSource();
         }
 
         override protected async void OnAppearing()
@@ -29,16 +26,18 @@ namespace Journals.App.Pages
             
             if (!bookmarks.Success)
             {
+                await Navigation.PopModalAsync();
                 App.Native.Notify(bookmarks.ErrorMessage);
                 return;
             }
 
-            var html = bookmarks.Content.GetHtml();
+            var bmHtml = bookmarks.Content.GetHtml();
 
-            bmSource.BaseUrl = App.Native.BaseUrl;
-            bmSource.Html = html;
-            BookmarksWebView.Source = bmSource;
+            Children.Add(new BookmarksPage(bmHtml));
+            Children.Add(new NewPostPage());
+            Children.Add(new MyJournalPage());
 
+            await Navigation.PopModalAsync();
         }
 	}
 }
